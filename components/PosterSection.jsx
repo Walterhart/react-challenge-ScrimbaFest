@@ -25,21 +25,42 @@ export default function PosterSection({date, festivalData}) {
  */
 	
 
+	const bandElement = festivalData
+		.filter(band =>{
+			return band.date === date
+		})
+		.sort((a,b)=>{
+			return a.importance - b.importance
+		})
+		.map(band =>{
+			
+			let fontSize
+			
+			switch(band.importance){
+			case 1:
+				fontSize = "giant"
+				break
+			case 2:
+				fontSize = "big"
+				break
+			case 3:
+				fontSize = "medium"
+				break
+			case 4:
+				fontSize = "small"
+				break
+			default:
+				fontSize = ""
+			}
+			return <p className={fontSize} key={nanoid()}>{band.name}</p>
+		})
+
 	return (
 		<div className="lineup-container">
 			<div className="day-container">
 				<h3>{date}</h3>
-			</div>
-			
-			<p className="giant">Super Big Important Band</p>
-			<p className="giant">Another One</p>
-			<p className="big">Somewhat Less Important Band</p>
-			<p className="big">Another One</p>
-			<p className="medium">Medium-Rank Band</p>
-			<p className="medium">Another One</p>
-			<p className="small">A band that's not that important, tbh</p>
-
-			
+			</div>	
+			{bandElement}		
 		</div>
 	)
 }
