@@ -34,25 +34,13 @@ export default function PosterSection({date, festivalData}) {
 		})
 		.map(band =>{
 			
-			let fontSize
-			
-			switch(band.importance){
-			case 1:
-				fontSize = "giant"
-				break
-			case 2:
-				fontSize = "big"
-				break
-			case 3:
-				fontSize = "medium"
-				break
-			case 4:
-				fontSize = "small"
-				break
-			default:
-				fontSize = ""
+			const fontSize = {
+					1: "giant",
+					2: "big",
+					3: "medium",
+					4: "small"
 			}
-			return <p className={fontSize} key={nanoid()}>{band.name}</p>
+			return <p className={fontSize[band.importance]} key={nanoid()}>{band.name}</p>
 		})
 
 	return (
